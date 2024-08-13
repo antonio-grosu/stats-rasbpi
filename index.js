@@ -1,9 +1,20 @@
 const express = require("express");
 const app = express();
+const os = require("os");
+const { execSync } = require("child_process");
+
+const stats = {
+  cpuInfo: os.cpus(),
+  totalMem: os.totalmem(),
+  freeMem: os.freemem(),
+  upTime: os.uptime(),
+  temperature: execSync("vcgencmd measure_temp").toString().trim(),
+};
 
 app.get("/", (req, res) => {
-  res.send("Hello, I'm API from RaspberryPI");
+  res.json(stats);
 });
-app.listen(8080, () => {
-  console.log("Running on port 8080");
+
+app.listen(80, () => {
+  console.log("Running on port 8");
 });
