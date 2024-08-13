@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     cpu: cpuInfo,
     freeMemory: `${formattedFreeMem} GB / ${formattedTotalMem} GB`,
     upTime: formattedUptime,
-    temp: `${temperature} °C`,
+    temp: temperature,
   };
   res.json(stats);
 });
