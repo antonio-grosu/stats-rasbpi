@@ -24,16 +24,24 @@ const secondsToHMS = (seconds) => {
 //GET METHOD
 
 app.get("/", (req, res) => {
-  const cpuInfo = os.cpus();
+  const cpuNum = os.cpus().length;
+  const platform = os.platform();
+  const hostname = os.hostname();
+  const networkInterfeces = os.networkInterfaces();
   const totalMem = os.totalmem();
   const formattedTotalMem = bytesToGB(totalMem);
   const freeMem = os.freemem();
   const formattedFreeMem = bytesToGB(freeMem);
   const upTime = os.uptime();
   const formattedUptime = secondsToHMS(upTime);
+  const memoryUsage = ((freeMem / totalMem) * 100).toFixed(2);
   const temperature = execSync("vcgencmd measure_temp").toString().trim();
   const stats = {
-    cpu: cpuInfo,
+    hostname: hostname,
+    platform: platform,
+    network: networkInterfeces,
+    cpu: cpuNum,
+    memUsage: `${memoryUsage} %`,
     freeMemory: `${formattedFreeMem} GB / ${formattedTotalMem} GB`,
     upTime: formattedUptime,
     temp: temperature,
