@@ -27,7 +27,6 @@ app.get("/", (req, res) => {
   const cpuNum = os.cpus().length;
   const platform = os.platform();
   const hostname = os.hostname();
-  const networkInterfeces = os.networkInterfaces();
   const totalMem = os.totalmem();
   const formattedTotalMem = bytesToGB(totalMem);
   const freeMem = os.freemem();
@@ -39,7 +38,6 @@ app.get("/", (req, res) => {
   const stats = {
     hostname: hostname,
     platform: platform,
-    network: networkInterfeces,
     cpu: cpuNum,
     memUsage: `${memoryUsage} %`,
     freeMemory: `${formattedFreeMem} GB / ${formattedTotalMem} GB`,
