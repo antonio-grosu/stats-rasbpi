@@ -1,7 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const os = require("os");
 const { execSync } = require("child_process");
+
+app.use(
+  cors({
+    origin: "*", // This allows all origins
+  })
+);
 
 //⚠️ Functions to format Data
 // Convert bytes to gigabytes
